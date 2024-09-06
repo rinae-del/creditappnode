@@ -9,12 +9,7 @@ module.exports = async function ({ req, res }) {
 
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
-    //return payload
-    return res.json({
-        status: 'success',
-        message: 'Hello from Appwrite!',
-        payload: req.payload
-    });
+
     const userId = req.payload.userId;
     const avatarFile = req.files.avatar;
 
