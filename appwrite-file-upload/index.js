@@ -3,7 +3,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-module.exports = async function(req, res) {
+export default async function({ req, res }) {
     const client = new sdk.Client();
         client
             .setEndpoint('https://cloud.appwrite.io/v1')
