@@ -1,5 +1,7 @@
 const { Client, Databases, Query } = require('node-appwrite');
 const sdk = require('node-appwrite');
+const Busboy = require('busboy');
+
 module.exports = async function ({ req, res }) {
     const client = new sdk.Client();
         client
@@ -10,10 +12,24 @@ module.exports = async function ({ req, res }) {
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
 
-    return res.json({ ok: true, 'request': req.body});
-    const userId = req.payload ? req.payload.userId : null;
-    const avatarFile = req.files ? req.files.avatar : null;
-   
+    const parts = req.body.split('\r\n');
+    let userId;
+    let avatarBuffer;
+    let fileName;
+
+    for (let i = 0; i < parts.length; i++) {
+        if (parts[i].includes('name="userId"')) {
+            userId = parts[i + 2].trim();
+        }
+        if (parts[i].includes('name="avatar"')) {
+            fileName = parts[i].match(/filename="(.+)"/)[1];
+            // Find the start of file content
+            const startIndex = req.body.indexOf('\r\n\r\n', req.body.indexOf('name="avatar"')) + 4;
+            const endIndex = req.body.lastIndexOf('\r\n------');
+            avatarBuffer = Buffer.from(req.body.slice(startIndex, endIndex), 'binary');
+            break;
+        }
+    }
 
     if (!userId) {
         return res.json({
@@ -22,7 +38,7 @@ module.exports = async function ({ req, res }) {
         }, 400);
     }
 
-    if (!avatarFile) {
+    if (!avatarBuffer) {
         return res.json({
             status: 'error',
             message: 'No avatar file provided.'
@@ -32,8 +48,8 @@ module.exports = async function ({ req, res }) {
     try {
         const newFile = await storage.createFile(
             '66d9dd600031db125daf',
-            sdk.ID.unique(),
-            sdk.InputFile.fromBuffer(avatarFile.data, avatarFile.name)
+            ID.unique(),
+            InputFile.fromBuffer(avatarBuffer, fileName)
         );
 
         const user = await databases.getDocument('66ba2aa70010f10f2b30', '66ba2ab5000c9d6e26aa', userId);
@@ -60,10 +76,10 @@ module.exports = async function ({ req, res }) {
         });
 
     } catch (error) {
+        console.error('Error:', error);
         return res.json({
             status: 'error',
             message: 'An error occurred: ' + error.message
         }, 500);
     }
-    return res.json({ ok: true, message: 'It works!' });
 };
