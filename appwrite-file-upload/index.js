@@ -9,7 +9,9 @@ module.exports = async function ({ req, res }) {
 
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
-
+    //get form data
+    const formData = new sdk.FormData();
+    return res.json({ ok: true, message: 'It works!', 'formData': formData });
     const userId = req.payload.userId;
     const avatarFile = req.files.avatar;
 
