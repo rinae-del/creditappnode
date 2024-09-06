@@ -10,8 +10,8 @@ module.exports = async function ({ req, res }) {
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
 
-    console.log('Received payload:', req.payload);
-    console.log('Received files:', req.files);
+    res.log('Received files:', req.files);
+    res.log('all:', req);
 
     const userId = req.payload ? req.payload.userId : null;
     const avatarFile = req.files ? req.files.avatar : null;
