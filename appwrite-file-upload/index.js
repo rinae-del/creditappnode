@@ -10,7 +10,7 @@ module.exports = async function ({ req, res }) {
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
 
-    return res.json({ ok: true, 'request': req.bodyBinary });
+    return res.json({ ok: true, 'request': req.body});
     const userId = req.payload ? req.payload.userId : null;
     const avatarFile = req.files ? req.files.avatar : null;
    
