@@ -1,7 +1,7 @@
 const { Client, Databases, Storage, ID, InputFile } = require('node-appwrite');
 const formidable = require('formidable');
 
-module.exports = async function (req, res) {
+module.exports = async function ({ req, res }) {
     const client = new Client()
         .setEndpoint('https://cloud.appwrite.io/v1')
         .setProject('66b0ff530019305177ae')
