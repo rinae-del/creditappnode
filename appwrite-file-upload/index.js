@@ -1,4 +1,5 @@
-const sdk = require('appwrite');
+const { Client, Databases, Query } = require('node-appwrite');
+const sdk = require('node-appwrite');
 
 module.exports = async function ({ req, res }) {
     const client = new sdk.Client();
