@@ -12,6 +12,7 @@ module.exports = async function ({ req, res }) {
 
     // Create a new formidable instance to parse the form data
     const form = new formidable.IncomingForm();
+    return res.json({'form': form});
     form.parse(req, async (err, fields, files) => {
         if (err) {
             return res.json({
@@ -39,7 +40,6 @@ module.exports = async function ({ req, res }) {
         }
 
         try {
-            // Upload the file to Appwrite storage
             const newFile = await storage.createFile(
                 '66d9dd600031db125daf',  // Replace with your bucket ID
                 ID.unique(),
