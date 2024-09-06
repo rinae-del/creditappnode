@@ -9,20 +9,13 @@ module.exports = async function ({ req, res }) {
 
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
-    //get form data
-    let payload;
-    try {
-        payload = JSON.parse(req.payload);
-    } catch (error) {
-        console.error('Error parsing payload:', error);
-        return res.json({
-            status: 'error',
-            message: 'Invalid payload format. Expected JSON.'
-        }, 400);
-    }
-    
-    const userId = req.payload.userId;
-    const avatarFile = req.files.avatar;
+
+    console.log('Received payload:', req.payload);
+    console.log('Received files:', req.files);
+
+    const userId = req.payload ? req.payload.userId : null;
+    const avatarFile = req.files ? req.files.avatar : null;
+   
 
     if (!userId) {
         return res.json({
