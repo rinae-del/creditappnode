@@ -12,7 +12,6 @@ module.exports = async function ({ req, res }) {
 
     // Create a new formidable instance to parse the form data
     const form = new formidable.IncomingForm();
-    return res.json({'form': form});
     form.parse(req, async (err, fields, files) => {
         if (err) {
             return res.json({
