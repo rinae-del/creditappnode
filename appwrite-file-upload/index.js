@@ -22,12 +22,12 @@ module.exports = async function(req, res) {
     const storage = new sdk.Storage(client);
     const databases = new sdk.Databases(client);
 
-    if (!req.headers['content-type'] || !req.headers['content-type'].includes('multipart/form-data')) {
-        return res.json({
-            status: 'error',
-            message: 'Invalid content type. Expected multipart/form-data.'
-        }, 400);
-    }
+    // if (!req.headers['content-type'] || !req.headers['content-type'].includes('multipart/form-data')) {
+    //     return res.json({
+    //         status: 'error',
+    //         message: 'Invalid content type. Expected multipart/form-data.'
+    //     }, 400);
+    // }
 
     const userId = req.payload.userId;
     const avatarFile = req.files.avatar;
