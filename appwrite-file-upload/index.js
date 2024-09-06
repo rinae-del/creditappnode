@@ -12,12 +12,11 @@ module.exports = async function ({ req, res }) {
 
     // Create a new formidable instance to parse the form data
     const form = new formidable.IncomingForm();
-    return res.json({'form': form});
     form.parse(req, async (err, fields, files) => {
         if (err) {
             return res.json({
                 status: 'error',
-                message: 'An error occurred while parsing form data: ' + err.message
+                message: 'An error occurred while parsing form data: ss'
             });
         }
 
@@ -33,7 +32,7 @@ module.exports = async function ({ req, res }) {
         }
 
         if (!avatarFile) {
-            return res.status(400).json({
+            return res.json({
                 status: 'error',
                 message: 'No avatar file provided.'
             });
