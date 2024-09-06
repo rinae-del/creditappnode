@@ -1,6 +1,6 @@
 const https = require('https');
-const fs = require('fs');
-const { Client, Storage } = require('appwrite');
+const fs = require('fs');;
+const { Client, Databases, Storage, ID, InputFile } = require('node-appwrite');
 
 const client = new Client()
             .setEndpoint('https://cloud.appwrite.io/v1')
