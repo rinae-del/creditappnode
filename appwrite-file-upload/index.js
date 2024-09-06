@@ -12,10 +12,10 @@ module.exports = async function (req, res) {
 
     // Create a new formidable instance to parse the form data
     const form = new formidable.IncomingForm();
-
+    return res.json({'form': form});
     form.parse(req, async (err, fields, files) => {
         if (err) {
-            return res.status(500).json({
+            return res.json({
                 status: 'error',
                 message: 'An error occurred while parsing form data: ' + err.message
             });
@@ -26,7 +26,7 @@ module.exports = async function (req, res) {
         const avatarFile = files.avatar;
 
         if (!userId) {
-            return res.status(400).json({
+            return res.json({
                 status: 'error',
                 message: 'User ID is required.'
             });
@@ -72,7 +72,7 @@ module.exports = async function (req, res) {
             });
 
         } catch (error) {
-            return res.status(500).json({
+            return res.json({
                 status: 'error',
                 message: 'An error occurred: ' + error.message
             });
