@@ -10,7 +10,7 @@ const client = new Client()
 
 const storage = new Storage(client);
 
-module.exports = async function (req, res) {
+module.exports = async function ({req, res}) {
     const imageUrl = 'https://doc.nuxeo.com/assets/nxdoc/university/university-rest-api-importer.png';
 
     const tempFilePath = '/tmp/university-rest-api-importer.png';
