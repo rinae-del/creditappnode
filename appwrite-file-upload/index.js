@@ -19,7 +19,7 @@ module.exports = async function (req, res) {
     // Use multer to handle file uploads
     upload.single('avatar')(req, res, async (err) => {
         if (err) {
-            return res.status(500).json({
+            return res.json({
                 status: 'error',
                 message: 'An error occurred while uploading the file: ' + err.message
             });
@@ -38,14 +38,14 @@ module.exports = async function (req, res) {
         const avatarFile = req.file;
 
         if (!userId) {
-            return res.status(400).json({
+            return res.json({
                 status: 'error',
                 message: 'User ID is required.'
             });
         }
 
         if (!avatarFile) {
-            return res.status(400).json({
+            return res.json({
                 status: 'error',
                 message: 'No avatar file provided.'
             });
@@ -92,7 +92,7 @@ module.exports = async function (req, res) {
             });
 
         } catch (error) {
-            return res.status(500).json({
+            return res.json({
                 status: 'error',
                 message: 'An error occurred: ' + error.message
             });
