@@ -17,6 +17,7 @@ module.exports = async function ({req, res}) {
             success: true,
             message: 'Image uploaded successfully',
             body: req.body,
+            imageFile: imageFile
         });
 
         
