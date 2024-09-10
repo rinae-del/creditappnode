@@ -18,6 +18,7 @@ module.exports = async function ({req, res}) {
                 success: false,
                 message: 'URI is required',
                 body: req.body,
+                payload: req.payload
             });
         }
         const match = /\.(\w+)$/.exec(uri);
