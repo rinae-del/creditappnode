@@ -7,13 +7,19 @@ module.exports = async function ({ req, res }) {
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      console.error("Error parsing form:", err);
       return res.json({
         success: false,
         message: "Error parsing form data",
         error: err.toString(),
       });
     }
+
+    return res.json({
+        success: true,
+        message: "Form data parsed successfully",
+        fields: fields,
+        files: files,
+        });
 
     try {
       const client = new sdk.Client();
@@ -56,7 +62,6 @@ module.exports = async function ({ req, res }) {
         });
       }
     } catch (error) {
-      console.error("Error uploading image:", error);
       return res.json({
         success: false,
         message: "Error uploading image",
