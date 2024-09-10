@@ -17,7 +17,7 @@ module.exports = async function ({req, res}) {
             success: true,
             message: 'Image uploaded successfully',
             result: 'result',
-            uri: req.body,
+            uri: uri,
         });
         const match = /\.(\w+)$/.exec(uri);
         const fileType = match ? `image/${match[1]}` : `image/jpeg`;
