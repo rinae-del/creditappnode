@@ -1,6 +1,6 @@
 const sdk = require('node-appwrite');
 
-module.exports = async function (req, res) {
+module.exports = async function ({req, res}) {
     try {
         const client = new sdk.Client();
         const storage = new sdk.Storage(client);
