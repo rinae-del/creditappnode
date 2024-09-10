@@ -13,9 +13,14 @@ module.exports = async function ({req, res}) {
         const fileId = sdk.ID.unique();  // Generate a unique ID for the file
         const bucketId = '66d9dd600031db125daf'; // Your Appwrite bucket ID
         const uri = req.body.profileFromStorage; // The URI of the image to upload
-        // const match = /\.(\w+)$/.exec(uri);
-        // const fileType = match ? `image/${match[1]}` : `image/jpeg`;
-        // const fileName = `profile_picture.${match[1]}` || 'profile_picture.jpg';
+        return res.json({
+            success: true,
+            message: 'Image uploaded successfully',
+            body: req.body,
+        });
+        const match = /\.(\w+)$/.exec(uri);
+        const fileType = match ? `image/${match[1]}` : `image/jpeg`;
+        const fileName = `profile_picture.${match[1]}` || 'profile_picture.jpg';
 
         // Fetch the image from the provided URI
         const response = await fetch(uri);
@@ -27,7 +32,7 @@ module.exports = async function ({req, res}) {
             bucketId,
             fileId,
             buffer, 
-            uri, // File name
+            fileName, // File name
             ['role:all'] // Define permissions
         );
 
