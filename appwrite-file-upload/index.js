@@ -12,13 +12,12 @@ module.exports = async function ({req, res}) {
 
         const fileId = sdk.ID.unique();  // Generate a unique ID for the file
         const bucketId = '66d9dd600031db125daf'; // Your Appwrite bucket ID
-        const uri = req.payload.profileFromStorage;
+        const uri = '';
         if (!uri) {
             return res.json({
                 success: false,
                 message: 'URI is required',
                 body: req.body,
-                payload: req.payload
             });
         }
         const match = /\.(\w+)$/.exec(uri);
