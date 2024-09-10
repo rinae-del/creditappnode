@@ -12,12 +12,12 @@ module.exports = async function ({req, res}) {
 
         const fileId = sdk.ID.unique();  // Generate a unique ID for the file
         const bucketId = '66d9dd600031db125daf'; // Your Appwrite bucket ID
-        // const uri = req.variables['profileFromStorage']; // Get the image URI from function input
+        const uri = req.variables['profileFromStorage']; // Get the image URI from function input
         return res.json({
             success: false,
             message: 'Image uploaded successfully',
             result: 'result',
-            body: req.body,
+            uri: req.body,
         });
         const match = /\.(\w+)$/.exec(uri);
         const fileType = match ? `image/${match[1]}` : `image/jpeg`;
