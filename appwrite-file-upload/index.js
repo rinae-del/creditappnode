@@ -1,7 +1,8 @@
 const sdk = require('node-appwrite');
 const formidable = require('formidable'); // Use formidable for parsing form data
+const fs = require('fs'); // Ensure fs is required for reading file
 
-module.exports = async function ({req, res}) {
+module.exports = async function ({ req, res }) {
     try {
         const client = new sdk.Client();
         const storage = new sdk.Storage(client);
@@ -14,10 +15,10 @@ module.exports = async function ({req, res}) {
         const fileId = sdk.ID.unique();
         const bucketId = '66d9dd600031db125daf';
 
-        // Parse the form data
-        const form = formidable({ multiples: true });
+        // Initialize the formidable form parser
+        const form = new formidable.IncomingForm();
+        
         form.parse(req, async (err, fields, files) => {
-            
             if (err) {
                 console.error('Error parsing form data:', err);
                 return res.json({
