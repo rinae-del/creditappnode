@@ -24,7 +24,6 @@ module.exports = async function ({ req, res }) {
                 return res.json({
                     success: false,
                     message: 'Error parsing form data',
-                    error: err.toString(),
                 });
             }
 
@@ -72,7 +71,6 @@ module.exports = async function ({ req, res }) {
                 return res.json({
                     success: false,
                     message: 'Error uploading image',
-                    error: error.toString(),
                 });
             }
         });
@@ -82,7 +80,6 @@ module.exports = async function ({ req, res }) {
         return res.json({
             success: false,
             message: 'Error',
-            error: error.toString(),
         });
     }
 };
