@@ -14,7 +14,7 @@ module.exports = async function ({req, res}) {
         const bucketId = '66d9dd600031db125daf'; // Your Appwrite bucket ID
         const uri = req.variables['profileFromStorage']; // Get the image URI from function input
         return res.json({
-            success: false,
+            success: true,
             message: 'Image uploaded successfully',
             result: 'result',
             uri: req.body,
