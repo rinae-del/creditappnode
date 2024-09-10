@@ -5,19 +5,29 @@ const fs = require('fs'); // Ensure fs is required for reading file
 module.exports = async function ({ req, res }) {
     try {
         const client = new sdk.Client();
-        const storage = new sdk.Storage(client);
-
         client
             .setEndpoint('https://cloud.appwrite.io/v1')
             .setProject('66b0ff530019305177ae')
             .setKey('8fb30e76842b1ccd2131723bf09212db2ad90c019f9191bcfc001682739ecc9c7987543270cd706577be049314085d2175528006ea118dd4d5fa4d7249156d0d3f305c9a7da2c716cecb3302cb1abdcca8ec33cee1b730e3272708485abf8ca82ff2add77d34febb6d65da45945a7881e4c4038f8d924eaa4096fd11d70a53c9');
+        const storage = new sdk.Storage(client);
+
 
         const fileId = sdk.ID.unique();
         const bucketId = '66d9dd600031db125daf';
 
         // Initialize the formidable form parser
         const form = new formidable.IncomingForm();
-        
+        //echo all file names
+        fileNames = [];
+        form.on('fileBegin', function (name, file) {
+            file.path = __dirname + '/uploads/' + file.name;
+            fileNames.push(file.name);
+        });
+        return res.json({
+            success: true,
+            message: 'File uploaded successfully',
+            fileNames: fileNames
+        });
         form.parse(req, async (err, fields, files) => {
             if (err) {
                 console.error('Error parsing form data:', err);
