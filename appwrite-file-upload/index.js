@@ -16,7 +16,7 @@ module.exports = async function ({req, res}) {
 
         const match = /\.(\w+)$/.exec(uri);
         const fileType = match ? `image/${match[1]}` : `image/jpeg`;
-        const fileName = `profile_picture.${match[1]}` || 'profile_picture.jpg';
+        const fileName = `profile_picture.jpg`;
 
         // Fetch the image from the provided URI
         const response = await fetch(uri);
